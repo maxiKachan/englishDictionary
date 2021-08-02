@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="englishDictionary:Web exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/englishDictionary_Web_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="englishDictionary/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="englishDictionary" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
