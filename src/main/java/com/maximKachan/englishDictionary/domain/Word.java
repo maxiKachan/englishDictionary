@@ -67,4 +67,12 @@ public class Word {
     public void setUsing(String using) {
         this.using = using;
     }
+
+    public double getUsingPercent() {
+        return usingPercent;
+    }
+
+    public void setUsingPercent(double usingPercent) {
+        this.usingPercent = usingPercent;
+    }
 }
