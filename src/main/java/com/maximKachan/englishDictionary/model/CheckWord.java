@@ -1,7 +1,7 @@
 package com.maximKachan.englishDictionary.model;
 
 public class CheckWord {
-    public boolean checkWord(){
+    public static boolean checkWord(String word){
         return false;
     }
 }

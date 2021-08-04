@@ -5,11 +5,11 @@ import com.maximKachan.englishDictionary.domain.Word;
 import java.util.List;
 
 public interface WordDao {
-    List<Word> getWords();
+    List<Word> getWords(Long id);
 
-    void addWord();
+    void addWord(Long id);
 
-    void updateWord();
+    void updateWord(Long id);
 
-    void deleteWord();
+    void deleteWord(Long id);
 }
