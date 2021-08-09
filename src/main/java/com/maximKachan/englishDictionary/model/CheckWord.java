@@ -6,10 +6,10 @@ import java.util.regex.Pattern;
 public class CheckWord {
 
     public static void main(String[] args) {
-        System.out.println(checkWord("was  were"));
+        System.out.println(checkWord("was,were"));
     }
 
     public static boolean checkWord(String word){
-        return Pattern.matches("[a-z,\\s]+",word);
+        return Pattern.matches("[a-z,]+",word);
     }
 }

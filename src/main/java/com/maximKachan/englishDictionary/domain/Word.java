@@ -12,6 +12,15 @@ public class Word {
     private String using;
     private double usingPercent;
 
+    public Word() {
+    }
+
+    public Word(String word, TypeOfWord type, String meaningInRussian) {
+        this.word = word;
+        this.type = type;
+        this.meaningInRussian = meaningInRussian;
+    }
+
     public String getWord() {
         return word;
     }
@@ -74,5 +83,19 @@ public class Word {
 
     public void setUsingPercent(double usingPercent) {
         this.usingPercent = usingPercent;
+    }
+
+    @Override
+    public String toString() {
+        return "Word{" +
+                "word='" + word + '\'' +
+                ", type=" + type +
+                ", meaningInRussian='" + meaningInRussian + '\'' +
+                ", opposite=" + opposite +
+                ", synonym=" + synonym +
+                ", describe='" + describe + '\'' +
+                ", using='" + using + '\'' +
+                ", usingPercent=" + usingPercent +
+                '}';
     }
 }

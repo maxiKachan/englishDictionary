@@ -12,7 +12,7 @@ CREATE TABLE ed_common_dictionary_word
 (
     word_id SERIAL ,
     word varchar (255) NOT NULL ,
-    type_of_word integer NOT NULL ,
+    type_of_word varchar (255) NOT NULL ,
     meaning_in_russian_word_w varchar (255) NOT NULL ,
     describe_word text ,
     using_word text ,
