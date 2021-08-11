@@ -6,15 +6,11 @@ import com.maximKachan.englishDictionary.exception.DaoException;
 import java.util.List;
 
 public interface WordDao {
-    List<Word> getWords() throws DaoException;
+    List<Word> getWords(String pattern) throws DaoException;
 
-    List<Word> getWordsByPattern(String pattern) throws DaoException;
+    void addWord(Word word) throws DaoException;
 
-    Word getWordByName(String name) throws DaoException;
+    void updateWord(Long id, Word word) throws DaoException;
 
-    void addWord(Long id);
-
-    void updateWord(Long id);
-
-    void deleteWord(Long id);
+    void deleteWord(Long id) throws DaoException;
 }

@@ -9,59 +9,23 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class WordDaoImpl implements WordDao{
 
-    public static void main(String[] args) throws DaoException {
-
-        List<Word> words;
-
-        Word word;
-        WordDaoImpl wordDao = new WordDaoImpl();
-        words = wordDao.getWordsByPattern("ag");
-
-//        System.out.println(word);
-        words.forEach(System.out::println);
-    }
-
-    public static final String GET_ALL_WORDS = "SELECT * FROM ed_common_dictionary_word";
-
-    public static final String GET_WORD_BY_NAME = "SELECT * FROM ed_common_dictionary_word " +
-            "WHERE word = ?";
-
     public static final String GET_WORDS_BY_PATTERN = "SELECT * FROM ed_common_dictionary_word " +
             "WHERE word LIKE ?";
 
-    @Override
-    public List<Word> getWords() throws DaoException {
+    public static final String ADD_WORD = "INSERT INTO ed_common_dictionary_word (word, type_of_word, " +
+            "meaning_in_russian_word_w) " +
+            "VALUES (?, ?, ?)";
 
-        List<Word> result = new LinkedList<>();
-
-        try(Connection con = getConnection();
-            PreparedStatement stmt = con.prepareStatement(GET_ALL_WORDS)){
-
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()){
-                Word word = new Word();
-
-                word.setWord(rs.getString("word"));
-                word.setType(TypeOfWord.valueOf(rs.getString("type_of_word")));
-                word.setMeaningInRussian(rs.getString("meaning_in_russian_word_w"));
-
-                result.add(word);
-            }
-        } catch (SQLException ex){
-            throw new DaoException(ex);
-        }
-
-        return result;
-    }
+    public static final String UPDATE_WORD = "UPDATE ed_common_dictionary_word SET word = ?," +
+            " type_of_word = ?, meaning_in_russian_word_w = ? " +
+            "WHERE word_id = ?";
 
     @Override
-    public List<Word> getWordsByPattern(String pattern) throws DaoException {
+    public List<Word> getWords(String pattern) throws DaoException {
 
         List<Word> result = new ArrayList<>(20);
 
@@ -77,7 +41,7 @@ public class WordDaoImpl implements WordDao{
 
                 word.setWord(rs.getString("word"));
                 word.setType(TypeOfWord.valueOf(rs.getString("type_of_word")));
-                word.setMeaningInRussian("meaning_in_russian_word_w");
+                word.setMeaningInRussian(rs.getString("meaning_in_russian_word_w"));
 
                 result.add(word);
             }
@@ -88,41 +52,38 @@ public class WordDaoImpl implements WordDao{
     }
 
     @Override
-    public Word getWordByName(String name) throws DaoException {
-
-        Word word = new Word();
-
+    public void addWord(Word word) throws DaoException{
         try(Connection con = getConnection();
-        PreparedStatement stmt = con.prepareStatement(GET_WORD_BY_NAME)){
+        PreparedStatement stmt = con.prepareStatement(ADD_WORD)){
 
-            stmt.setString(1, name);
+            stmt.setString(1, word.getWord());
+            stmt.setString(2, word.getType().toString());
+            stmt.setString(3, word.getMeaningInRussian());
 
-            ResultSet rs = stmt.executeQuery();
+            stmt.executeUpdate();
+        } catch (SQLException ex){
+            throw new DaoException();
+        }
+    }
 
-            while (rs.next()){
-                word.setWord(rs.getString("word"));
-                word.setType(TypeOfWord.valueOf(rs.getString("type_of_word")));
-                word.setMeaningInRussian(rs.getString("meaning_in_russian_word_w"));
-            }
+    @Override
+    public void updateWord(Long id, Word word) throws DaoException {
+        try(Connection con = getConnection();
+        PreparedStatement stmt = con.prepareStatement(UPDATE_WORD)){
+
+            stmt.setString(1, word.getWord());
+            stmt.setString(2, word.getType().toString());
+            stmt.setString(3, word.getMeaningInRussian());
+            stmt.setLong(4, id);
+
+            stmt.executeUpdate();
         } catch (SQLException ex){
             throw new DaoException(ex);
         }
-
-        return word;
     }
 
     @Override
-    public void addWord(Long id) {
-
-    }
-
-    @Override
-    public void updateWord(Long id) {
-
-    }
-
-    @Override
-    public void deleteWord(Long id) {
+    public void deleteWord(Long id) throws DaoException{
 
     }
 
