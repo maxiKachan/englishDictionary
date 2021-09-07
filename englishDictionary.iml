@@ -15,5 +15,12 @@
         </sourceRoots>
       </configuration>
     </facet>
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="SpringContext" removed="false">
+          <file>file://$MODULE_DIR$/src/main/resources/springContext.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
   </component>
 </module>
