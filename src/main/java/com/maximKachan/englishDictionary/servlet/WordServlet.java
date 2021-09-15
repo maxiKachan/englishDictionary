@@ -1,6 +1,9 @@
 package com.maximKachan.englishDictionary.servlet;
 
+import com.maximKachan.englishDictionary.domain.Word;
 import com.maximKachan.englishDictionary.model.inMemory.DictionaryList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,20 +13,23 @@ import java.io.IOException;
 import java.util.List;
 
 public class WordServlet extends HttpServlet {
-    private static final List<String> list = DictionaryList.getAll();
+    private static final List<Word> list = DictionaryList.getAll();
+    private static final Logger log = LoggerFactory.getLogger(WordServlet.class);
 
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        log.info("getAll");
         request.setAttribute("words", DictionaryList.getAll());
         String sId = request.getParameter("id");
         if (sId != null && !sId.isEmpty()){
             int id = Integer.parseInt(sId);
-            list.remove(id);
-            System.out.println(id + " removed");
+            if (id >= 0 && id < list.size()){
+                log.info("{} removed", id);
+                list.remove(id);
+            }
         }
         request.getRequestDispatcher("/words.jsp").forward(request, response);
-        System.out.println("get");
     }
 
     @Override
@@ -32,8 +38,8 @@ public class WordServlet extends HttpServlet {
         String word = request.getParameter("word");
         System.out.println(word);
         if (word != null && !word.isEmpty()){
-            list.add(word);
-            System.out.println("add word");
+            log.info("add word");
+            list.add(new Word(word));
         }
         response.sendRedirect("words");
     }

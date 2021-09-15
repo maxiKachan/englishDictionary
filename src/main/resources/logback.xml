@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+            <pattern>%d{dd.MM.yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{20} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="file" class="ch.qos.logback.core.FileAppender">
+        <file>${PET_PROJECT_ROOT}/englishDictionary/log/engDictionary</file>
+        <encoder>
+            <pattern>%date %-5level %logger{50}.%M:%L - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="temporaryFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${PET_PROJECT_ROOT}/englishDictionary/log/tempLog.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>tempLog.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>3GB</totalSizeCap>
+
+            <encoder>
+                <pattern>%date %-5level %logger{50}.%M:%L - %msg%n</pattern>
+            </encoder>
+        </rollingPolicy>
+    </appender>
+
+    <logger name="com.maximKachan.englishDictionary" level="DEBUG"/>
+
+    <root level="info">
+        <appender-ref ref="console" />
+        <appender-ref ref="file"/>
+        <appender-ref ref="temporaryFile"/>
+    </root>
+</configuration>

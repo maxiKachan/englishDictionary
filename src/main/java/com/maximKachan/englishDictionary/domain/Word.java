@@ -15,6 +15,10 @@ public class Word {
     public Word() {
     }
 
+    public Word(String word){
+        this.word = word;
+    }
+
     public Word(String word, TypeOfWord type, String meaningInRussian) {
         this.word = word;
         this.type = type;

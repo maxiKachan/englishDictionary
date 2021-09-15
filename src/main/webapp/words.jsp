@@ -19,10 +19,9 @@
     <jsp:useBean id="words" scope="request" type="java.util.List"/>
     <c:forEach var="list" items="${words}">
         <tr>
-            <td>${list}</td>
+            <td>${list.word}</td>
             <td><a href="words?id=${words.indexOf(list)}">Delete</a></td>
         </tr>
-
     </c:forEach>
 </table>
 </body>

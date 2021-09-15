@@ -1,11 +1,17 @@
 package com.maximKachan.englishDictionary;
 
 import com.maximKachan.englishDictionary.utils.StreamUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.slf4j.LoggerFactory.getLogger;
+
 public class SimpleStarter {
+    private static final Logger log = getLogger(SimpleStarter.class);
+
     public static void main(String[] args) {
         List<String> list = new ArrayList<>();
         list.add("knowledge");
