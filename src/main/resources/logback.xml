@@ -17,22 +17,21 @@
     </appender>
 
     <appender name="temporaryFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${PET_PROJECT_ROOT}/englishDictionary/log/tempLog.log</file>
+        <file>${PET_PROJECT_ROOT}/englishDictionary/log/tempLog/file.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>tempLog.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>file%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>30</maxHistory>
             <totalSizeCap>3GB</totalSizeCap>
-
-            <encoder>
-                <pattern>%date %-5level %logger{50}.%M:%L - %msg%n</pattern>
-            </encoder>
         </rollingPolicy>
+        <encoder>
+            <pattern>%date %-5level %logger{50}.%M:%L - %msg%n</pattern>
+        </encoder>
     </appender>
 
     <logger name="com.maximKachan.englishDictionary" level="DEBUG"/>
 
     <root level="info">
-        <appender-ref ref="console" />
+        <appender-ref ref="console"/>
         <appender-ref ref="file"/>
         <appender-ref ref="temporaryFile"/>
     </root>

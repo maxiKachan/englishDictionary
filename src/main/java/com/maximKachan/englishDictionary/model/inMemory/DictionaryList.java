@@ -3,14 +3,20 @@ package com.maximKachan.englishDictionary.model.inMemory;
 import com.maximKachan.englishDictionary.domain.Word;
 import com.maximKachan.englishDictionary.exception.DaoException;
 import com.maximKachan.englishDictionary.model.dao.WordDao;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class DictionaryList implements WordDao {
+    private static final Logger log = LoggerFactory.getLogger(DictionaryList.class);
 
     private static final List<Word> dictionary;
     static {
+        log.info("create in memory dictionary");
         dictionary = new ArrayList<>();
         dictionary.add(new Word("knowledge"));
         dictionary.add(new Word("do"));
@@ -27,12 +33,13 @@ public class DictionaryList implements WordDao {
     }
 
     public static List<Word> getAll(){
+        log.info("get all");
         return dictionary;
     }
 
     @Override
     public List<Word> getWords(String pattern) throws DaoException {
-        return null;
+        return getAll();
     }
 
     @Override
