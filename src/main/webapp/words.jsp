@@ -6,9 +6,12 @@
 </head>
 <body>
 <h1>Words JSP</h1>
+<jsp:useBean id="word" scope="request" class="java.lang.String"/>
+<jsp:useBean id="id" scope="request" class="java.lang.String"/>
 <form action="words" method="post">
     <h4>Add new words</h4>
-    <label><input type="text" name="word" required></label>
+    <label><input type="text" name="word" value="${word}" required></label>
+    <label><input type="text" name="id" value="${id}" readonly></label>
     <button type="submit">Add</button>
 </form>
 <table>
@@ -21,6 +24,7 @@
         <tr>
             <td>${list.word}</td>
             <td><a href="words?id=${words.indexOf(list)}">Delete</a></td>
+            <td><a href="words?id=${words.indexOf(list)}&word=${list.word}">Update</a> </td>
         </tr>
     </c:forEach>
 </table>
