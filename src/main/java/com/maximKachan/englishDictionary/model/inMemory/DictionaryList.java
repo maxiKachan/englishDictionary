@@ -34,22 +34,26 @@ public class DictionaryList implements WordDao {
 
     @Override
     public List<Word> getWords(String pattern) throws DaoException {
+        log.info("getWord imMemoryDao");
         return dictionary;
     }
 
     @Override
     public void addWord(Word word) throws DaoException {
+        log.info("addWord imMemoryDao");
         dictionary.add(word);
     }
 
     @Override
     public void updateWord(Long id, Word word) throws DaoException {
+        log.info("updateWord imMemoryDao");
         long temp = id;
         dictionary.set((int)temp, word);
     }
 
     @Override
     public void deleteWord(Long id) throws DaoException {
+        log.info("deleteWord imMemoryDao");
         long temp = id;
         dictionary.remove((int) temp);
     }
