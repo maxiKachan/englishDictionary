@@ -2,7 +2,7 @@ package com.maximKachan.englishDictionary;
 
 import com.maximKachan.englishDictionary.domain.Word;
 import com.maximKachan.englishDictionary.exception.DaoException;
-import com.maximKachan.englishDictionary.model.inMemory.DictionaryList;
+import com.maximKachan.englishDictionary.model.inMemory.InMemoryWordDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -19,7 +19,7 @@ public class Starter {
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("springContext.xml");
 
         System.out.println(Arrays.toString(context.getBeanDefinitionNames()));
-        DictionaryList dl = context.getBean(DictionaryList.class);
+        InMemoryWordDao dl = context.getBean(InMemoryWordDao.class);
         List<Word> wordList = dl.getWords("");
         Word word = context.getBean(Word.class);
         word.setWord("FirstWord");

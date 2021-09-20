@@ -1,7 +1,7 @@
 package com.maximKachan.englishDictionary.servlet;
 
 import com.maximKachan.englishDictionary.domain.Word;
-import com.maximKachan.englishDictionary.model.inMemory.DictionaryList;
+import com.maximKachan.englishDictionary.model.inMemory.InMemoryWordDao;
 import com.maximKachan.englishDictionary.service.WordService;
 import com.maximKachan.englishDictionary.service.WordServiceImpl;
 import org.slf4j.Logger;
@@ -20,7 +20,7 @@ public class WordServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        wordService = new WordServiceImpl(new DictionaryList());
+        wordService = new WordServiceImpl(new InMemoryWordDao());
     }
 
     @Override

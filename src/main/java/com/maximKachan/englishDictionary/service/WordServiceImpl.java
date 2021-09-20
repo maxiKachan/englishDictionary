@@ -3,11 +3,14 @@ package com.maximKachan.englishDictionary.service;
 import com.maximKachan.englishDictionary.domain.Word;
 import com.maximKachan.englishDictionary.exception.DaoException;
 import com.maximKachan.englishDictionary.model.dao.WordDao;
+import com.maximKachan.englishDictionary.utils.CheckWord;
+import com.maximKachan.englishDictionary.utils.StreamUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -32,12 +35,22 @@ public class WordServiceImpl implements WordService{
             throw new RuntimeException();
         }
 
-        return words;
+        if(pattern.isEmpty()) {
+            return words;
+        } else {
+            if (CheckWord.checkWord(pattern)){
+                return Collections.emptyList();
+            }
+            return StreamUtils.filterWordBySubstring(pattern, words);
+        }
     }
 
     @Override
     public void addWord(Word word) {
         log.info("add word service");
+        if (CheckWord.checkWord(word.getWord())){
+            return;
+        }
         try {
             wordDao.addWord(word);
         } catch (DaoException e) {
@@ -48,6 +61,9 @@ public class WordServiceImpl implements WordService{
     @Override
     public void updateWord(Long id, Word word) {
         log.info("update word service");
+        if (CheckWord.checkWord(word.getWord())){
+            return;
+        }
         try {
             wordDao.updateWord(id, word);
         } catch (DaoException e) {

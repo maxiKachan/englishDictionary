@@ -1,5 +1,7 @@
 package com.maximKachan.englishDictionary.utils;
 
+import com.maximKachan.englishDictionary.domain.Word;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -25,7 +27,10 @@ public class StreamUtils {
     }
 
     public static List<String> filterBySubstring(String substring, List<String> list){
-
         return list.stream().filter(s -> s.contains(substring.toLowerCase())).sorted(Comparator.comparingInt(String::length)).collect(Collectors.toList());
+    }
+
+    public static List<Word> filterWordBySubstring(String substring, List<Word> list){
+        return list.stream().filter(s -> s.getWord().contains(substring.toLowerCase())).sorted(Comparator.comparingInt(s -> s.getWord().length())).collect(Collectors.toList());
     }
 }
