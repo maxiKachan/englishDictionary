@@ -1,34 +1,22 @@
 package com.maximKachan.englishDictionary.service;
 
 import com.maximKachan.englishDictionary.domain.Word;
-import com.maximKachan.englishDictionary.model.dao.WordDao;
-import com.maximKachan.englishDictionary.model.inMemory.InMemoryWordDao;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class WordServiceImplTest {
+@ContextConfiguration("classpath:springContext.xml")
+@RunWith(SpringJUnit4ClassRunner.class)
+public class WordServiceImplSpringTest {
 
-    private static ConfigurableApplicationContext ctx;
-    private static WordService wsi;
-
-    @BeforeClass
-    public static void beforeClass(){
-        ctx = new ClassPathXmlApplicationContext("springContext.xml");
-        WordDao wordDao = ctx.getBean(InMemoryWordDao.class);
-        wsi = new WordServiceImpl(wordDao);
-    }
-
-    @AfterClass
-    public static void afterClass(){
-        ctx.close();
-    }
+    @Autowired
+    private WordServiceImpl wsi;
 
     @Test
     public void getWordsWithEmptyPattern() {
@@ -91,4 +79,5 @@ public class WordServiceImplTest {
         wsi.deleteWord(2L);
         assertEquals(size-1, wsi.getWords("").size());
     }
+
 }
