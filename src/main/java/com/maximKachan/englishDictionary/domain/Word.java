@@ -22,6 +22,11 @@ public class Word {
         this.word = word;
     }
 
+    public Word(String word, String meaningInRussian){
+        this.word = word;
+        this.meaningInRussian = meaningInRussian;
+    }
+
     public Word(String word, TypeOfWord type, String meaningInRussian) {
         this.word = word;
         this.type = type;

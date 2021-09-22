@@ -7,7 +7,7 @@ import com.maximKachan.englishDictionary.utils.CheckWord;
 import com.maximKachan.englishDictionary.utils.StreamUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -19,8 +19,7 @@ public class WordServiceImpl implements WordService{
     private static final Logger log = LoggerFactory.getLogger(WordServiceImpl.class);
     private final WordDao wordDao;
 
-    @Autowired
-    public WordServiceImpl(WordDao wordDao){
+    public WordServiceImpl(@Qualifier("wordDaoJdbcImpl") WordDao wordDao){
         this.wordDao = wordDao;
     }
 
@@ -49,6 +48,7 @@ public class WordServiceImpl implements WordService{
     public void addWord(Word word) {
         log.info("add word service");
         if (CheckWord.checkWord(word.getWord())){
+            log.info("wrong word");
             return;
         }
         try {
