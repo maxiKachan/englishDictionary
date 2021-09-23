@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-@ContextConfiguration("classpath:springContext.xml")
+@ContextConfiguration("classpath:spring/springContext.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class WordServiceImplSpringTest {
 

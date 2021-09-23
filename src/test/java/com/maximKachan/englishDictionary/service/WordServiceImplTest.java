@@ -20,7 +20,7 @@ public class WordServiceImplTest {
 
     @BeforeClass
     public static void beforeClass(){
-        ctx = new ClassPathXmlApplicationContext("springContext.xml");
+        ctx = new ClassPathXmlApplicationContext("spring/springContext.xml");
         WordDao wordDao = ctx.getBean(InMemoryWordDao.class);
         wsi = new WordServiceImpl(wordDao);
     }

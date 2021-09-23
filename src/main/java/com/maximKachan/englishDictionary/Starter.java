@@ -16,7 +16,7 @@ public class Starter {
 
     public static void main(String[] args) throws DaoException {
         log.info("Start application");
-        ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("springContext.xml");
+        ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("spring/springContext.xml");
 
         System.out.println(Arrays.toString(context.getBeanDefinitionNames()));
         InMemoryWordDao dl = context.getBean(InMemoryWordDao.class);
