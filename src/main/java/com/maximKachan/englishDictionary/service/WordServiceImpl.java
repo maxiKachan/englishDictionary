@@ -19,7 +19,7 @@ public class WordServiceImpl implements WordService{
     private static final Logger log = LoggerFactory.getLogger(WordServiceImpl.class);
     private final WordDao wordDao;
 
-    public WordServiceImpl(@Qualifier("wordDaoJdbcImpl") WordDao wordDao){
+    public WordServiceImpl(@Qualifier("wordDaoJdbcTemplateImpl") WordDao wordDao){
         this.wordDao = wordDao;
     }
 
