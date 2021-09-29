@@ -8,6 +8,8 @@ import java.util.List;
 public interface WordDao {
     List<Word> getWords(String pattern) throws DaoException;
 
+    Word getWordById(Long id) throws DaoException;
+
     void addWord(Word word) throws DaoException;
 
     void updateWord(Long id, Word word) throws DaoException;

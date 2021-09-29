@@ -8,6 +8,8 @@ public interface WordService {
 
     List<Word> getWords(String pattern);
 
+    Word getWordById(Long id);
+
     void addWord(Word word);
 
     void updateWord(Long id, Word word);

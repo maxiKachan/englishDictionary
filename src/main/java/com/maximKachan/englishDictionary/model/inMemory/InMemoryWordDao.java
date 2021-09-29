@@ -39,6 +39,11 @@ public class InMemoryWordDao implements WordDao {
     }
 
     @Override
+    public Word getWordById(Long id) throws DaoException {
+        return null;
+    }
+
+    @Override
     public void addWord(Word word) throws DaoException {
         log.info("addWord imMemoryDao");
         dictionary.add(word);

@@ -71,4 +71,9 @@ public class TestHelper implements WordDao {
         dictionary.remove((int) temp);
         log.info("" + dictionary.size());
     }
+
+    @Override
+    public Word getWordById(Long id) throws DaoException {
+        return null;
+    }
 }

@@ -28,56 +28,77 @@ public class WordServiceImpl implements WordService{
         log.info("get all service");
         List<Word> words;
 
+        if (CheckWord.checkPattern(pattern)){
+            return Collections.emptyList();
+        }
+
         try {
             words = wordDao.getWords(pattern);
         } catch (DaoException e) {
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
 
         if(pattern.isEmpty()) {
             return words;
         } else {
-            if (CheckWord.checkWord(pattern)){
-                return Collections.emptyList();
-            }
             return StreamUtils.filterWordBySubstring(pattern, words);
         }
     }
 
     @Override
+    public Word getWordById(Long id) {
+        log.info("get word by id service");
+        Word word;
+
+        try{
+            word = wordDao.getWordById(id);
+        } catch (DaoException e){
+            throw new RuntimeException(e);
+        }
+
+        return word;
+    }
+
+    @Override
     public void addWord(Word word) {
         log.info("add word service");
-        if (CheckWord.checkWord(word.getWord())){
+
+        if (!CheckWord.checkWord(word)){
             log.info("wrong word");
             return;
         }
+
         try {
             wordDao.addWord(word);
         } catch (DaoException e) {
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
     }
 
     @Override
     public void updateWord(Long id, Word word) {
         log.info("update word service");
-        if (CheckWord.checkWord(word.getWord())){
+
+        if (!CheckWord.checkWord(word)){
+            log.info("wrong word");
             return;
         }
+
         try {
             wordDao.updateWord(id, word);
         } catch (DaoException e) {
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
     }
 
     @Override
     public void deleteWord(Long id) {
         log.info("delete word service");
+
         try {
             wordDao.deleteWord(id);
         } catch (DaoException e) {
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
     }
 }

@@ -32,6 +32,14 @@ public class WordDaoJdbcTemplateImpl implements WordDao{
     }
 
     @Override
+    public Word getWordById(Long id) throws DaoException {
+        log.info("get word by id dao");
+
+        return jdbcTemplate.query("SELECT word_id, word, meaning_in_russian FROM sp_words WHERE word_id = ?",
+                ROW_MAPPER, id).stream().findAny().orElse(null);
+    }
+
+    @Override
     public void addWord(Word word) throws DaoException {
         log.info("addWord");
         jdbcTemplate.update("INSERT INTO sp_words (word, meaning_in_russian) VALUES (?,?)",

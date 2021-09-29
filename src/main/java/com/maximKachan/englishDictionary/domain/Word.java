@@ -2,10 +2,9 @@ package com.maximKachan.englishDictionary.domain;
 
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 public class Word {
+    private Integer wordId;
     private String word;
 //    private TypeOfWord type;
     private String meaningInRussian;
@@ -32,6 +31,15 @@ public class Word {
 //        this.type = type;
 //        this.meaningInRussian = meaningInRussian;
 //    }
+
+
+    public Integer getWordId() {
+        return wordId;
+    }
+
+    public void setWordId(Integer wordId) {
+        this.wordId = wordId;
+    }
 
     public String getWord() {
         return word;
@@ -100,6 +108,7 @@ public class Word {
     @Override
     public String toString() {
         return "Word{" +
+                "id='" + wordId + '\'' +
                 "word='" + word + '\'' +
 //                ", type=" + type +
                 ", meaningInRussian='" + meaningInRussian + '\'' +
@@ -109,5 +118,22 @@ public class Word {
 //                ", using='" + using + '\'' +
 //                ", usingPercent=" + usingPercent +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
+        Word that = (Word) o;
+        return wordId != 0 && wordId.equals(that.wordId);
+    }
+
+    @Override
+    public int hashCode() {
+        return wordId == null ? 0 : wordId;
     }
 }

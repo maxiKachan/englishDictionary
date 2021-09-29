@@ -47,6 +47,12 @@ public class WordDaoJdbcImpl implements WordDao{
         return words;
     }
 
+    //This method is mock, because this class is example how JDBC works
+    @Override
+    public Word getWordById(Long id) throws DaoException {
+        return null;
+    }
+
     @Override
     public void addWord(Word word) throws DaoException {
         log.info("addWord");

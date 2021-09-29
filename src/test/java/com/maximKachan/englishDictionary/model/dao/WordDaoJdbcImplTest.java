@@ -2,6 +2,7 @@ package com.maximKachan.englishDictionary.model.dao;
 
 import com.maximKachan.englishDictionary.domain.Word;
 import com.maximKachan.englishDictionary.service.WordService;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,14 @@ public class WordDaoJdbcImplTest {
     @Autowired
     private WordService ws;
 
+    @Ignore
     @Test
     public void getWords() {
         List<Word> words = ws.getWords("");
         assertEquals(5, words.size());
     }
 
+    @Ignore
     @Test
     public void addWord() {
         Word word = new Word();
@@ -35,6 +38,7 @@ public class WordDaoJdbcImplTest {
         assertEquals(word.getWord(), words.get(words.size()-1).getWord());
     }
 
+    @Ignore
     @Test
     public void updateWord() {
         Word word = new Word();
@@ -45,6 +49,7 @@ public class WordDaoJdbcImplTest {
         assertEquals(word.getWord(), words.get(words.size()-1).getWord());
     }
 
+    @Ignore
     @Test
     public void deleteWord() {
         List<Word> words = ws.getWords("");
