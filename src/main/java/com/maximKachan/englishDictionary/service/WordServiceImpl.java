@@ -2,7 +2,7 @@ package com.maximKachan.englishDictionary.service;
 
 import com.maximKachan.englishDictionary.domain.Word;
 import com.maximKachan.englishDictionary.exception.DaoException;
-import com.maximKachan.englishDictionary.model.dao.WordDao;
+import com.maximKachan.englishDictionary.repository.WordRepository;
 import com.maximKachan.englishDictionary.utils.CheckWord;
 import com.maximKachan.englishDictionary.utils.StreamUtils;
 import org.slf4j.Logger;
@@ -17,9 +17,9 @@ import java.util.List;
 public class WordServiceImpl implements WordService{
 
     private static final Logger log = LoggerFactory.getLogger(WordServiceImpl.class);
-    private final WordDao wordDao;
+    private final WordRepository wordDao;
 
-    public WordServiceImpl(@Qualifier("wordDaoJdbcTemplateImpl") WordDao wordDao){
+    public WordServiceImpl(@Qualifier("jpaWordRepository") WordRepository wordDao){
         this.wordDao = wordDao;
     }
 

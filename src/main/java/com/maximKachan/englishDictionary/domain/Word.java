@@ -1,12 +1,23 @@
 package com.maximKachan.englishDictionary.domain;
 
-import org.springframework.stereotype.Component;
+import javax.persistence.*;
 
-@Component
+@Entity
+@Table(name = "sp_words")
+@NamedQueries(
+    @NamedQuery(name = "Word.findAll", query = "SELECT w FROM Word w")
+)
 public class Word {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "word_id")
     private Integer wordId;
+
+    @Column(name = "word")
     private String word;
 //    private TypeOfWord type;
+    @Column(name = "meaning_in_russian")
     private String meaningInRussian;
 //    private List<String> opposite;
 //    private List<String> synonym;
@@ -22,6 +33,12 @@ public class Word {
     }
 
     public Word(String word, String meaningInRussian){
+        this.word = word;
+        this.meaningInRussian = meaningInRussian;
+    }
+
+    public Word(Integer wordId, String word, String meaningInRussian){
+        this.wordId = wordId;
         this.word = word;
         this.meaningInRussian = meaningInRussian;
     }
@@ -120,20 +137,20 @@ public class Word {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o){
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()){
-            return false;
-        }
-        Word that = (Word) o;
-        return wordId != 0 && wordId.equals(that.wordId);
-    }
-
-    @Override
-    public int hashCode() {
-        return wordId == null ? 0 : wordId;
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o){
+//            return true;
+//        }
+//        if (o == null || getClass() != o.getClass()){
+//            return false;
+//        }
+//        Word that = (Word) o;
+//        return wordId != 0 && wordId.equals(that.wordId);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return wordId == null ? 0 : wordId;
+//    }
 }

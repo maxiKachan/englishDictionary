@@ -1,8 +1,8 @@
 package com.maximKachan.englishDictionary.service;
 
 import com.maximKachan.englishDictionary.domain.Word;
-import com.maximKachan.englishDictionary.model.dao.WordDao;
-import com.maximKachan.englishDictionary.model.inMemory.InMemoryWordDao;
+import com.maximKachan.englishDictionary.repository.WordRepository;
+import com.maximKachan.englishDictionary.repository.inMemory.InMemoryWordDao;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -21,7 +21,7 @@ public class WordServiceImplTest {
     @BeforeClass
     public static void beforeClass(){
         ctx = new ClassPathXmlApplicationContext("spring/springContext.xml");
-        WordDao wordDao = ctx.getBean(InMemoryWordDao.class);
+        WordRepository wordDao = ctx.getBean(InMemoryWordDao.class);
         wsi = new WordServiceImpl(wordDao);
     }
 

@@ -1,8 +1,9 @@
-package com.maximKachan.englishDictionary.model.dao;
+package com.maximKachan.englishDictionary.repository.jdbc;
 
 
 import com.maximKachan.englishDictionary.domain.Word;
 import com.maximKachan.englishDictionary.exception.DaoException;
+import com.maximKachan.englishDictionary.repository.WordRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -12,15 +13,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class WordDaoJdbcTemplateImpl implements WordDao{
+public class WordRepositoryJdbcTemplateImpl implements WordRepository {
 
-    private static final Logger log = LoggerFactory.getLogger(WordDaoJdbcTemplateImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(WordRepositoryJdbcTemplateImpl.class);
 
     private static final BeanPropertyRowMapper<Word> ROW_MAPPER = BeanPropertyRowMapper.newInstance(Word.class);
 
     private final JdbcTemplate jdbcTemplate;
 
-    public WordDaoJdbcTemplateImpl(JdbcTemplate jdbcTemplate) {
+    public WordRepositoryJdbcTemplateImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

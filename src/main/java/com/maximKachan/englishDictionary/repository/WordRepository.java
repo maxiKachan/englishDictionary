@@ -1,11 +1,11 @@
-package com.maximKachan.englishDictionary.model.dao;
+package com.maximKachan.englishDictionary.repository;
 
 import com.maximKachan.englishDictionary.domain.Word;
 import com.maximKachan.englishDictionary.exception.DaoException;
 
 import java.util.List;
 
-public interface WordDao {
+public interface WordRepository {
     List<Word> getWords(String pattern) throws DaoException;
 
     Word getWordById(Long id) throws DaoException;

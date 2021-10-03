@@ -1,4 +1,4 @@
-package com.maximKachan.englishDictionary.model.dao;
+package com.maximKachan.englishDictionary.repository.jdbc;
 
 import com.maximKachan.englishDictionary.config.Config;
 

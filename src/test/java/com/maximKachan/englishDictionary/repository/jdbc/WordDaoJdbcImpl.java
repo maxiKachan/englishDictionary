@@ -1,7 +1,8 @@
-package com.maximKachan.englishDictionary.model.dao;
+package com.maximKachan.englishDictionary.repository.jdbc;
 
 import com.maximKachan.englishDictionary.domain.Word;
 import com.maximKachan.englishDictionary.exception.DaoException;
+import com.maximKachan.englishDictionary.repository.WordRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class WordDaoJdbcImpl implements WordDao{
+public class WordDaoJdbcImpl implements WordRepository {
     private static final Logger log = LoggerFactory.getLogger(WordDaoJdbcImpl.class);
 
     public static final String GET_WORDS_BY_PATTERN = "SELECT word, meaning_in_russian FROM sp_words WHERE word LIKE ?";

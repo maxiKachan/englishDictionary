@@ -2,14 +2,14 @@ package com.maximKachan.englishDictionary.utils;
 
 import com.maximKachan.englishDictionary.domain.Word;
 import com.maximKachan.englishDictionary.exception.DaoException;
-import com.maximKachan.englishDictionary.model.dao.WordDao;
+import com.maximKachan.englishDictionary.repository.WordRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestHelper implements WordDao {
+public class TestHelper implements WordRepository {
     private static final Logger log = LoggerFactory.getLogger(TestHelper.class);
 
     private static final List<Word> dictionary;

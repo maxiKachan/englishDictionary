@@ -1,4 +1,4 @@
-package com.maximKachan.englishDictionary.model.dao;
+package com.maximKachan.englishDictionary.repository.jdbc;
 
 import com.maximKachan.englishDictionary.domain.Word;
 import com.maximKachan.englishDictionary.service.WordService;
@@ -27,6 +27,7 @@ public class WordDaoJdbcTemplateImplTest {
     @Test
     public void getAllWords() {
         List<Word> words = ws.getWords("");
+        assertMatch(words, mockWords);
         assertEquals(mockWords.size(), words.size());
     }
 

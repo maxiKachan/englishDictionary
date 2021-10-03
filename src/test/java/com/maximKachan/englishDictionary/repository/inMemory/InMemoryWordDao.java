@@ -1,8 +1,8 @@
-package com.maximKachan.englishDictionary.model.inMemory;
+package com.maximKachan.englishDictionary.repository.inMemory;
 
 import com.maximKachan.englishDictionary.domain.Word;
 import com.maximKachan.englishDictionary.exception.DaoException;
-import com.maximKachan.englishDictionary.model.dao.WordDao;
+import com.maximKachan.englishDictionary.repository.WordRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -11,25 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class InMemoryWordDao implements WordDao {
+public class InMemoryWordDao implements WordRepository {
     private static final Logger log = LoggerFactory.getLogger(InMemoryWordDao.class);
 
     private static final List<Word> dictionary;
     static {
         log.info("create in memory dictionary");
         dictionary = new ArrayList<>();
-        dictionary.add(new Word("knowledge"));
-        dictionary.add(new Word("do"));
-        dictionary.add(new Word("say"));
-        dictionary.add(new Word("go"));
-        dictionary.add(new Word("get"));
-        dictionary.add(new Word("make"));
-        dictionary.add(new Word("know"));
-        dictionary.add(new Word("one"));
-        dictionary.add(new Word("time"));
-        dictionary.add(new Word("year"));
-        dictionary.add(new Word("have"));
-        dictionary.add(new Word("think"));
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.maximKachan.englishDictionary.servlet;
 
 import com.maximKachan.englishDictionary.domain.Word;
-import com.maximKachan.englishDictionary.model.inMemory.InMemoryWordDao;
+import com.maximKachan.englishDictionary.repository.inMemory.InMemoryWordDao;
 import com.maximKachan.englishDictionary.service.WordService;
 import com.maximKachan.englishDictionary.service.WordServiceImpl;
 import org.slf4j.Logger;
