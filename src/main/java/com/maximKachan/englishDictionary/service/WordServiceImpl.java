@@ -46,7 +46,7 @@ public class WordServiceImpl implements WordService{
     }
 
     @Override
-    public Word getWordById(Long id) {
+    public Word getWordById(Integer id) {
         log.info("get word by id service");
         Word word;
 
@@ -76,7 +76,7 @@ public class WordServiceImpl implements WordService{
     }
 
     @Override
-    public void updateWord(Long id, Word word) {
+    public void updateWord(Integer id, Word word) {
         log.info("update word service");
 
         if (!CheckWord.checkWord(word)){
@@ -92,7 +92,7 @@ public class WordServiceImpl implements WordService{
     }
 
     @Override
-    public void deleteWord(Long id) {
+    public void deleteWord(Integer id) {
         log.info("delete word service");
 
         try {

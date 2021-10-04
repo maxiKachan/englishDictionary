@@ -27,7 +27,7 @@ public class InMemoryWordDao implements WordRepository {
     }
 
     @Override
-    public Word getWordById(Long id) throws DaoException {
+    public Word getWordById(Integer id) throws DaoException {
         return null;
     }
 
@@ -38,14 +38,14 @@ public class InMemoryWordDao implements WordRepository {
     }
 
     @Override
-    public void updateWord(Long id, Word word) throws DaoException {
+    public void updateWord(Integer id, Word word) throws DaoException {
         log.info("updateWord imMemoryDao");
         long temp = id;
         dictionary.set((int)temp, word);
     }
 
     @Override
-    public void deleteWord(Long id) throws DaoException {
+    public void deleteWord(Integer id) throws DaoException {
         log.info("deleteWord imMemoryDao");
         log.info("" + dictionary.size());
         long temp = id;

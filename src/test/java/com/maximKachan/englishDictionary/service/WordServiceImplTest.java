@@ -72,7 +72,7 @@ public class WordServiceImplTest {
         Word word = new Word("gone");
         Word getWord = wsi.getWords("go").get(0);
         int id = wsi.getWords("").indexOf(getWord);
-        wsi.updateWord((long) id, word);
+        wsi.updateWord(id, word);
         assertEquals(word, wsi.getWords("").get(id));
     }
 
@@ -81,14 +81,14 @@ public class WordServiceImplTest {
         Word word = new Word("qwerty321");
         Word getWord = wsi.getWords("go").get(0);
         int id = wsi.getWords("").indexOf(getWord);
-        wsi.updateWord((long) id, word);
+        wsi.updateWord(id, word);
         assertEquals(getWord, wsi.getWords("").get(id));
     }
 
     @Test
     public void deleteWord() {
         int size = wsi.getWords("").size();
-        wsi.deleteWord(2L);
+        wsi.deleteWord(2);
         assertEquals(size-1, wsi.getWords("").size());
     }
 }

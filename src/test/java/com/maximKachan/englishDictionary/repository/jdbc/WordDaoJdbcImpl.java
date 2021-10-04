@@ -50,7 +50,7 @@ public class WordDaoJdbcImpl implements WordRepository {
 
     //This method is mock, because this class is example how JDBC works
     @Override
-    public Word getWordById(Long id) throws DaoException {
+    public Word getWordById(Integer id) throws DaoException {
         return null;
     }
 
@@ -70,7 +70,7 @@ public class WordDaoJdbcImpl implements WordRepository {
     }
 
     @Override
-    public void updateWord(Long id, Word word) throws DaoException {
+    public void updateWord(Integer id, Word word) throws DaoException {
         log.info("updateWord");
         try(Connection con = getConnection();
         PreparedStatement stmt = con.prepareStatement(UPDATE_WORD)){
@@ -86,7 +86,7 @@ public class WordDaoJdbcImpl implements WordRepository {
     }
 
     @Override
-    public void deleteWord(Long id) throws DaoException {
+    public void deleteWord(Integer id) throws DaoException {
         log.info("deleteWord");
         try (Connection con = getConnection();
         PreparedStatement stmt = con.prepareStatement(DELETE_WORD)){

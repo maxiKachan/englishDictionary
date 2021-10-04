@@ -10,14 +10,18 @@ import java.util.List;
 public class WordTestData {
 
     public static final List<Word> mockWords;
+    public static final List<Word> wordsWithPattern_o;
     public static Word WORD;
     static {
         mockWords = new ArrayList<>();
+        wordsWithPattern_o = new ArrayList<>();
         mockWords.add(new Word(1, "go", "идти"));
         mockWords.add(new Word(2, "do", "делать"));
         mockWords.add(new Word(3, "say", "сказать"));
         mockWords.add(new Word(4, "get", "получать"));
         mockWords.add(new Word(5, "make", "делать"));
+        wordsWithPattern_o.add(mockWords.get(0));
+        wordsWithPattern_o.add(mockWords.get(1));
         WORD = mockWords.get(2);
     }
 
@@ -38,7 +42,7 @@ public class WordTestData {
 
     public static List<Word> addMockWord(){
         List<Word> addOneWord = new ArrayList<>(mockWords);
-        addOneWord.add(new Word("jump", "прыгать"));
+        addOneWord.add(new Word(6,"jump", "прыгать"));
         return addOneWord;
     }
 

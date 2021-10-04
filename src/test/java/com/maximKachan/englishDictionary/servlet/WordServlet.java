@@ -31,7 +31,7 @@ public class WordServlet extends HttpServlet {
         String word = request.getParameter("word");
         if (sId != null && !sId.isEmpty()){
             log.info("do get - id not null");
-            long id = Integer.parseInt(sId);
+            int id = Integer.parseInt(sId);
             if (word != null && !word.isEmpty()){
                 log.info("do get - word not null");
                 request.setAttribute("word", word);
@@ -54,7 +54,7 @@ public class WordServlet extends HttpServlet {
         String sId = request.getParameter("id");
         if (word != null && !word.isEmpty()){
             if (sId != null && !sId.isEmpty()){
-                Long id = Long.parseLong(sId);
+                Integer id = Integer.parseInt(sId);
                 wordService.updateWord(id, new Word(word));
             } else {
                 log.info("add word");

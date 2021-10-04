@@ -33,7 +33,7 @@ public class WordRepositoryJdbcTemplateImpl implements WordRepository {
     }
 
     @Override
-    public Word getWordById(Long id) throws DaoException {
+    public Word getWordById(Integer id) throws DaoException {
         log.info("get word by id dao");
 
         return jdbcTemplate.query("SELECT word_id, word, meaning_in_russian FROM sp_words WHERE word_id = ?",
@@ -48,14 +48,14 @@ public class WordRepositoryJdbcTemplateImpl implements WordRepository {
     }
 
     @Override
-    public void updateWord(Long id, Word word) throws DaoException {
+    public void updateWord(Integer id, Word word) throws DaoException {
         log.info("updateWord");
         jdbcTemplate.update("UPDATE sp_words SET word = ?, meaning_in_russian = ? WHERE word_id = ?",
                 word.getWord(), word.getMeaningInRussian(), id);
     }
 
     @Override
-    public void deleteWord(Long id) throws DaoException {
+    public void deleteWord(Integer id) throws DaoException {
         log.info("deleteWord");
         jdbcTemplate.update("DELETE FROM sp_words WHERE word_id = ?", id);
     }

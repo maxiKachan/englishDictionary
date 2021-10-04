@@ -44,7 +44,7 @@ public class WordDaoJdbcImplTest {
         Word word = new Word();
         word.setWord("jump");
         word.setMeaningInRussian("прыгать или скакать");
-        ws.updateWord(6L, word);
+        ws.updateWord(6, word);
         List<Word> words = ws.getWords("");
         assertEquals(word.getWord(), words.get(words.size()-1).getWord());
     }
@@ -53,7 +53,7 @@ public class WordDaoJdbcImplTest {
     @Test
     public void deleteWord() {
         List<Word> words = ws.getWords("");
-        long id = words.size()-1;
+        int id = words.size()-1;
         ws.deleteWord(id);
         List<Word> updatedWords = ws.getWords("");
         assertEquals(words.size()-1, updatedWords.size());

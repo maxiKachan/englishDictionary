@@ -137,20 +137,20 @@ public class Word {
                 '}';
     }
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o){
-//            return true;
-//        }
-//        if (o == null || getClass() != o.getClass()){
-//            return false;
-//        }
-//        Word that = (Word) o;
-//        return wordId != 0 && wordId.equals(that.wordId);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return wordId == null ? 0 : wordId;
-//    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
+        Word that = (Word) o;
+        return wordId != 0 && wordId.equals(that.wordId);
+    }
+
+    @Override
+    public int hashCode() {
+        return wordId == null ? 0 : wordId;
+    }
 }

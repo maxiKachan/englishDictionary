@@ -34,7 +34,7 @@ public class WordDaoJdbcTemplateImplTest {
     @Test
     public void getWordsWithPattern(){
         List<Word> words = ws.getWords("o");
-        assertEquals(getMockWordsWithPattern().size(), words.size());
+        assertMatch(words, wordsWithPattern_o);
     }
 
     @Test
@@ -45,13 +45,13 @@ public class WordDaoJdbcTemplateImplTest {
 
     @Test
     public void getWordById(){
-        Word word = ws.getWordById(3L);
+        Word word = ws.getWordById(3);
         Assert.assertEquals(WORD, word);
     }
 
     @Test
     public void getWordByWithOverId(){
-        Word word = ws.getWordById(7L);
+        Word word = ws.getWordById(7);
         Assert.assertNull(word);
     }
 
@@ -88,7 +88,7 @@ public class WordDaoJdbcTemplateImplTest {
 
     @Test
     public void updateWord() {
-        ws.updateWord(5L, new Word("run", "бежать"));
+        ws.updateWord(5, new Word("run", "бежать"));
         List<Word> updatedWords = ws.getWords("");
         assertEquals(mockUpdateWord().getWord(), updatedWords.get(updatedWords.size()-1).getWord());
         assertEquals(mockUpdateWord().getMeaningInRussian(),
@@ -97,7 +97,7 @@ public class WordDaoJdbcTemplateImplTest {
 
     @Test
     public void updateWrongWord(){
-        ws.updateWord(5L, new Word("", "бежать"));
+        ws.updateWord(5, new Word("", "бежать"));
         List<Word> updatedWords = ws.getWords("");
         assertEquals(mockWords.get(mockWords.size()-1).getWord(), updatedWords.get(updatedWords.size()-1).getWord());
         assertEquals(mockWords.get(mockWords.size()-1).getMeaningInRussian(),
@@ -106,7 +106,7 @@ public class WordDaoJdbcTemplateImplTest {
 
     @Test
     public void deleteWord() {
-        ws.deleteWord(5L);
+        ws.deleteWord(5);
         List<Word> deletedWords = mockDeleteWords();
         assertEquals(mockDeleteWords().size(), deletedWords.size());
         assertEquals(mockDeleteWords().get(mockDeleteWords().size()-1).getWord(),

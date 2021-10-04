@@ -56,13 +56,13 @@ public class TestHelper implements WordRepository {
     }
 
     @Override
-    public void updateWord(Long id, Word word) throws DaoException {
+    public void updateWord(Integer id, Word word) throws DaoException {
         long temp = id;
         dictionary.set((int)temp, word);
     }
 
     @Override
-    public void deleteWord(Long id) throws DaoException {
+    public void deleteWord(Integer id) throws DaoException {
         log.info("" + dictionary.size());
         for (Word word : dictionary){
             System.out.println(word.getWord());
@@ -73,7 +73,7 @@ public class TestHelper implements WordRepository {
     }
 
     @Override
-    public Word getWordById(Long id) throws DaoException {
+    public Word getWordById(Integer id) throws DaoException {
         return null;
     }
 }
