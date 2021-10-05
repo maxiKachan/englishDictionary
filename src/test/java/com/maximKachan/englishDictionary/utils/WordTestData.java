@@ -25,13 +25,6 @@ public class WordTestData {
         WORD = mockWords.get(2);
     }
 
-    public static List<Word> getMockWordsWithPattern(){
-        List<Word> selectWords = new ArrayList<>();
-        selectWords.add(mockWords.get(0));
-        selectWords.add(mockWords.get(1));
-        return selectWords;
-    }
-
     public static void assertMatch(Iterable<Word> actual, Iterable<Word> expected){
         Assertions.assertThat(actual).usingDefaultElementComparator().isEqualTo(expected);
     }
@@ -56,7 +49,7 @@ public class WordTestData {
 
     public static List<Word> mockDeleteWords(){
         List<Word> deletedOneWord = new ArrayList<>(mockWords);
-        deletedOneWord.remove(deletedOneWord.size()-1);
+        deletedOneWord.remove(0);
         return deletedOneWord;
     }
 }

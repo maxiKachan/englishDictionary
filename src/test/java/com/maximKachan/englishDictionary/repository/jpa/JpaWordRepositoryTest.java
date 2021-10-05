@@ -77,6 +77,6 @@ public class JpaWordRepositoryTest {
     @Test
     public void deleteWord() {
         ws.deleteWord(1);
-        assertEquals(4, ws.getWords("").size());
+        assertMatch(mockDeleteWords(), ws.getWords(""));
     }
 }
