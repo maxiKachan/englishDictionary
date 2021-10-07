@@ -19,57 +19,60 @@
         <jdbc:script location="classpath:db/dictionarySmallProject.sql"/>
     </jdbc:initialize-database>
 
-<!--    <context:component-scan base-package="com.maximKachan.englishDictionary"/>-->
-
 <!--    <jpa:repositories base-package="com.maximKachan.englishDictionary"-->
 <!--                      entity-manager-factory-ref="emf"-->
 <!--                      transaction-manager-ref="txManager"/>-->
 
 <!--    <tx:annotation-driven transaction-manager="txManager" />-->
 
-    <bean id="jpaWordRepository" class="com.maximKachan.englishDictionary.repository.jpa.JpaWordRepository"/>
-
-<!--    <bean id="wordDaoJdbcTemplateImpl" class="com.maximKachan.englishDictionary.repository.jdbc.WordRepositoryJdbcTemplateImpl">-->
-<!--    </bean>-->
-
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource">
         <property name="driverClassName" value="${db.driver}"/>
         <property name="url" value="${db.url}"/>
         <property name="username" value="${db.login}"/>
         <property name="password" value="${db.password}"/>
     </bean>
 
-    <bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
-    p:dataSource-ref="dataSource"
-    p:packagesToScan="com.maximKachan.englishDictionary.domain">
+    <beans profile="jdbc">
+        <context:component-scan base-package="com.maximKachan.englishDictionary.repository.jdbc"/>
+        <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+            <constructor-arg ref="dataSource"/>
+        </bean>
+        <bean id="namedJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+            <constructor-arg ref="dataSource"/>
+        </bean>
 
-        <property name="jpaPropertyMap">
-            <map>
-                <entry key="#{T(org.hibernate.cfg.AvailableSettings).FORMAT_SQL}" value="${hibernate.format_sql}"/>
-                <entry key="#{T(org.hibernate.cfg.AvailableSettings).USE_SQL_COMMENTS}"
-                       value="${hibernate.use_sql_comments}"/>
-            </map>
-        </property>
+    </beans>
 
-        <property name="jpaVendorAdapter">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
-                  p:showSql="${jpa.ShowSql}"
-                  p:databasePlatform="org.hibernate.dialect.PostgreSQL10Dialect">
-            </bean>
-        </property>
+    <beans profile="jpa">
+        <bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+              p:dataSource-ref="dataSource"
+              p:packagesToScan="com.maximKachan.englishDictionary.domain">
 
-    </bean>
+            <property name="jpaPropertyMap">
+                <map>
+                    <entry key="#{T(org.hibernate.cfg.AvailableSettings).FORMAT_SQL}" value="${hibernate.format_sql}"/>
+                    <entry key="#{T(org.hibernate.cfg.AvailableSettings).USE_SQL_COMMENTS}"
+                           value="${hibernate.use_sql_comments}"/>
+                </map>
+            </property>
 
-    <tx:annotation-driven/>
+            <property name="jpaVendorAdapter">
+                <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
+                      p:showSql="${jpa.ShowSql}"
+                      p:databasePlatform="org.hibernate.dialect.PostgreSQL10Dialect">
+                </bean>
+            </property>
+        </bean>
 
-    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
-        p:entityManagerFactory-ref="emf"/>
+        <bean id="jpaWordRepository" class="com.maximKachan.englishDictionary.repository.jpa.JpaWordRepository"/>
 
-<!--    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">-->
-<!--        <constructor-arg ref="dataSource"/>-->
-<!--    </bean>-->
+        <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+              p:entityManagerFactory-ref="emf"/>
 
-<!--    <bean id="namedJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">-->
-<!--        <constructor-arg ref="dataSource"/>-->
-<!--    </bean>-->
+        <tx:annotation-driven/>
+    </beans>
+
+    <beans profile="dataJpa">
+
+    </beans>
 </beans>

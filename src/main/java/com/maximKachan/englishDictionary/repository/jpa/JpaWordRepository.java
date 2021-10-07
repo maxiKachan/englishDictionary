@@ -4,6 +4,7 @@ import com.maximKachan.englishDictionary.domain.Word;
 import com.maximKachan.englishDictionary.exception.DaoException;
 import com.maximKachan.englishDictionary.repository.WordRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -12,13 +13,14 @@ import javax.persistence.PersistenceContextType;
 import java.util.List;
 
 @Repository
+@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 public class JpaWordRepository implements WordRepository {
 
     @PersistenceContext(type = PersistenceContextType.TRANSACTION)
     private EntityManager em;
 
     @Override
-    public List getWords(String pattern) throws DaoException {
+    public List<Word> getWords(String pattern) throws DaoException {
         return em.createNamedQuery("Word.findAll").getResultList();
     }
 

@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
+
 public class WordDaoJdbcImpl implements WordRepository {
     private static final Logger log = LoggerFactory.getLogger(WordDaoJdbcImpl.class);
 

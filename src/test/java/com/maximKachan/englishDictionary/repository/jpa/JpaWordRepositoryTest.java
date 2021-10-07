@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
@@ -19,6 +20,7 @@ import static org.junit.Assert.*;
 @ContextConfiguration({"classpath:spring/springContext.xml", "classpath:spring/spring-db.xml"})
 @RunWith(SpringRunner.class)
 @Sql(scripts = "classpath:db/dictionarySmallProject.sql", config = @SqlConfig(encoding = "UTF-8"))
+@ActiveProfiles("jpa")
 public class JpaWordRepositoryTest {
 
     @Autowired

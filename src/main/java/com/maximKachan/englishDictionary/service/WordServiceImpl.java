@@ -17,10 +17,10 @@ import java.util.List;
 public class WordServiceImpl implements WordService{
 
     private static final Logger log = LoggerFactory.getLogger(WordServiceImpl.class);
-    private final WordRepository wordDao;
+    private final WordRepository wordRepository;
 
-    public WordServiceImpl(@Qualifier("jpaWordRepository") WordRepository wordDao){
-        this.wordDao = wordDao;
+    public WordServiceImpl(WordRepository wordRepository){
+        this.wordRepository = wordRepository;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class WordServiceImpl implements WordService{
         }
 
         try {
-            words = wordDao.getWords(pattern);
+            words = wordRepository.getWords(pattern);
         } catch (DaoException e) {
             throw new RuntimeException(e);
         }
@@ -51,7 +51,7 @@ public class WordServiceImpl implements WordService{
         Word word;
 
         try{
-            word = wordDao.getWordById(id);
+            word = wordRepository.getWordById(id);
         } catch (DaoException e){
             throw new RuntimeException(e);
         }
@@ -69,7 +69,7 @@ public class WordServiceImpl implements WordService{
         }
 
         try {
-            wordDao.addWord(word);
+            wordRepository.addWord(word);
         } catch (DaoException e) {
             throw new RuntimeException(e);
         }
@@ -85,7 +85,7 @@ public class WordServiceImpl implements WordService{
         }
 
         try {
-            wordDao.updateWord(id, word);
+            wordRepository.updateWord(id, word);
         } catch (DaoException e) {
             throw new RuntimeException(e);
         }
@@ -96,7 +96,7 @@ public class WordServiceImpl implements WordService{
         log.info("delete word service");
 
         try {
-            wordDao.deleteWord(id);
+            wordRepository.deleteWord(id);
         } catch (DaoException e) {
             throw new RuntimeException(e);
         }

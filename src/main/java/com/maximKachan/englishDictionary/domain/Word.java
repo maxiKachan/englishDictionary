@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "sp_words")
 @NamedQueries(
-    @NamedQuery(name = "Word.findAll", query = "SELECT w FROM Word w")
+        @NamedQuery(name = "Word.findAll", query = "SELECT w FROM Word w")
 )
 public class Word {
 

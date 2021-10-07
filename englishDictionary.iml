@@ -19,6 +19,8 @@
       <configuration>
         <fileset id="fileset" name="SpringContext" removed="false">
           <file>file://$MODULE_DIR$/src/main/resources/springContext.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring/spring-db.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring/springContext.xml</file>
         </fileset>
       </configuration>
     </facet>
