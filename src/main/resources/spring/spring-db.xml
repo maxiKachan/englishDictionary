@@ -4,12 +4,14 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:jpa="http://www.springframework.org/schema/c"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
             http://www.springframework.org/schema/context
             http://www.springframework.org/schema/context/spring-context-3.0.xsd
+            http://www.springframework.org/schema/data/jpa
+            http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
             http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
             http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
@@ -18,12 +20,6 @@
     <jdbc:initialize-database enabled="${db.init}">
         <jdbc:script location="classpath:db/dictionarySmallProject.sql"/>
     </jdbc:initialize-database>
-
-<!--    <jpa:repositories base-package="com.maximKachan.englishDictionary"-->
-<!--                      entity-manager-factory-ref="emf"-->
-<!--                      transaction-manager-ref="txManager"/>-->
-
-<!--    <tx:annotation-driven transaction-manager="txManager" />-->
 
     <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource">
         <property name="driverClassName" value="${db.driver}"/>
@@ -73,6 +69,33 @@
     </beans>
 
     <beans profile="dataJpa">
+        <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+              p:dataSource-ref="dataSource"
+              p:packagesToScan="com.maximKachan.englishDictionary.domain">
 
+            <property name="jpaPropertyMap">
+                <map>
+                    <entry key="#{T(org.hibernate.cfg.AvailableSettings).FORMAT_SQL}" value="${hibernate.format_sql}"/>
+                    <entry key="#{T(org.hibernate.cfg.AvailableSettings).USE_SQL_COMMENTS}"
+                           value="${hibernate.use_sql_comments}"/>
+                </map>
+            </property>
+
+            <property name="jpaVendorAdapter">
+                <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
+                      p:showSql="${jpa.ShowSql}"
+                      p:databasePlatform="org.hibernate.dialect.PostgreSQL10Dialect">
+                </bean>
+            </property>
+        </bean>
+
+        <bean id="dataJpaWordRepository" class="com.maximKachan.englishDictionary.repository.dataJpa.DataJpaWordRepository"/>
+
+        <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+              p:entityManagerFactory-ref="entityManagerFactory"/>
+
+        <tx:annotation-driven/>
+
+        <jpa:repositories base-package="com.maximKachan.englishDictionary.repository.dataJpa"/>
     </beans>
 </beans>

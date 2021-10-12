@@ -1,4 +1,4 @@
-package com.maximKachan.englishDictionary.repository.jdbc;
+package com.maximKachan.englishDictionary.repository.dataJpa;
 
 import com.maximKachan.englishDictionary.domain.Word;
 import com.maximKachan.englishDictionary.service.WordService;
@@ -20,17 +20,17 @@ import static org.junit.Assert.assertEquals;
 @ContextConfiguration({"classpath:spring/springContext.xml", "classpath:spring/spring-db.xml"})
 @RunWith(SpringRunner.class)
 @Sql(scripts = "classpath:db/dictionarySmallProject.sql", config = @SqlConfig(encoding = "UTF-8"))
-@ActiveProfiles("jdbc")
-public class WordDaoJdbcTemplateImplTest {
+@ActiveProfiles("dataJpa")
+public class DataJpaWordRepositoryTest {
 
     @Autowired
     private WordService ws;
 
     @Test
-    public void getAllWords() {
+    public void getWords() {
         List<Word> words = ws.getWords("");
-        assertMatch(words, mockWords);
         assertEquals(mockWords.size(), words.size());
+        assertMatch(words, mockWords);
     }
 
     @Test
@@ -46,7 +46,7 @@ public class WordDaoJdbcTemplateImplTest {
     }
 
     @Test
-    public void getWordById(){
+    public void getWordById() {
         Word word = ws.getWordById(3);
         Assert.assertEquals(WORD, word);
     }
@@ -57,61 +57,57 @@ public class WordDaoJdbcTemplateImplTest {
         Assert.assertNull(word);
     }
 
+
     @Test
     public void addWord() {
         ws.addWord(new Word("jump", "прыгать"));
         List<Word> addedWord = ws.getWords("");
-        List<Word> addedMockWord = addedMockWord();
-        assertEquals(addedMockWord.size(), addedWord.size());
-        assertEquals(mockAddWord().getWord(), addedWord.get(addedWord.size()-1).getWord());
-        assertEquals(mockAddWord().getMeaningInRussian(), addedWord.get(addedWord.size()-1).getMeaningInRussian());
+        assertEquals(addedMockWord().size(), addedWord.size());
+        assertMatch(addedMockWord(), addedWord);
     }
 
     @Test
-    public void addWrongWordEmpty(){
+    public void addEmptyWord(){
         ws.addWord(new Word("", "прыгать"));
-        List<Word> addedWrongWord = ws.getWords("");
-        assertEquals(addedWrongWord.size(), mockWords.size());
+        List<Word> addedEmptyWord = ws.getWords("");
+        assertEquals(addedEmptyWord.size(), mockWords.size());
+        assertMatch(addedEmptyWord, mockWords);
     }
 
     @Test
-    public void addWrongWordMeaningIsEmpty(){
+    public void addWordMeaningIsEmpty(){
         ws.addWord(new Word("jump", ""));
-        List<Word> addedWrongWord = ws.getWords("");
-        assertEquals(addedWrongWord.size(), mockWords.size());
+        List<Word> addedWordMeaningIsEmpty = ws.getWords("");
+        assertEquals(addedWordMeaningIsEmpty.size(), mockWords.size());
+        assertMatch(addedWordMeaningIsEmpty, mockWords);
     }
 
     @Test
-    public void addWrongWordWithDigit(){
+    public void addWordWithDigit(){
         ws.addWord(new Word("lump69", "прыгать"));
-        List<Word> addedWrongWord = ws.getWords("");
-        assertEquals(addedWrongWord.size(), mockWords.size());
+        List<Word> addedWordWithDigit = ws.getWords("");
+        assertEquals(addedWordWithDigit.size(), mockWords.size());
+        assertMatch(addedWordWithDigit, mockWords);
     }
 
     @Test
     public void updateWord() {
-        ws.updateWord(5, new Word("run", "бежать"));
+        ws.updateWord(5, mockUpdateWord());
         List<Word> updatedWords = ws.getWords("");
-        assertEquals(mockUpdateWord().getWord(), updatedWords.get(updatedWords.size()-1).getWord());
-        assertEquals(mockUpdateWord().getMeaningInRussian(),
-                updatedWords.get(updatedWords.size()-1).getMeaningInRussian());
+        assertMatch(updatedWords, mockUpdatedWord());
     }
 
     @Test
     public void updateWrongWord(){
         ws.updateWord(5, new Word("", "бежать"));
         List<Word> updatedWords = ws.getWords("");
-        assertEquals(mockWords.get(mockWords.size()-1).getWord(), updatedWords.get(updatedWords.size()-1).getWord());
-        assertEquals(mockWords.get(mockWords.size()-1).getMeaningInRussian(),
-                updatedWords.get(updatedWords.size()-1).getMeaningInRussian());
+        assertMatch(updatedWords, mockWords);
     }
 
     @Test
     public void deleteWord() {
         ws.deleteWord(5);
-        List<Word> deletedWords = mockDeleteWords();
-        assertEquals(mockDeleteWords().size(), deletedWords.size());
-        assertEquals(mockDeleteWords().get(mockDeleteWords().size()-1).getWord(),
-                deletedWords.get(deletedWords.size()-1).getWord());
+        List<Word> deletedWords = ws.getWords("");
+        assertMatch(deletedWords, mockDeleteWords());
     }
 }

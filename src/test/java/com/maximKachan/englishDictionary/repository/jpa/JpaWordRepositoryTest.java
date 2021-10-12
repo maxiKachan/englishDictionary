@@ -61,7 +61,7 @@ public class JpaWordRepositoryTest {
     public void addWord() {
         ws.addWord(new Word("jump", "прыгать"));
         List<Word> addedWord = ws.getWords("");
-        List<Word> addedMockWord = addMockWord();
+        List<Word> addedMockWord = addedMockWord();
         assertEquals(addedMockWord.size(), addedWord.size());
         assertMatch(addedMockWord, addedWord);
     }

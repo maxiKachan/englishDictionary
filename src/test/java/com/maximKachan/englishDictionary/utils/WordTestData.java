@@ -33,7 +33,7 @@ public class WordTestData {
         return Collections.emptyList();
     }
 
-    public static List<Word> addMockWord(){
+    public static List<Word> addedMockWord(){
         List<Word> addOneWord = new ArrayList<>(mockWords);
         addOneWord.add(new Word(6,"jump", "прыгать"));
         return addOneWord;
@@ -44,12 +44,18 @@ public class WordTestData {
     }
 
     public static Word mockUpdateWord(){
-        return new Word("run", "бежать");
+        return new Word(5,"run", "бежать");
+    }
+
+    public static List<Word> mockUpdatedWord(){
+        List<Word> updatedWords = new ArrayList<>(mockWords);
+        updatedWords.set(4,mockUpdateWord());
+        return updatedWords;
     }
 
     public static List<Word> mockDeleteWords(){
         List<Word> deletedOneWord = new ArrayList<>(mockWords);
-        deletedOneWord.remove(0);
+        deletedOneWord.remove(4);
         return deletedOneWord;
     }
 }
