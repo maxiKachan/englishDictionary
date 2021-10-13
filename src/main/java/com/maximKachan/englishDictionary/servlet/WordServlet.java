@@ -1,12 +1,13 @@
 package com.maximKachan.englishDictionary.servlet;
 
 import com.maximKachan.englishDictionary.domain.Word;
-import com.maximKachan.englishDictionary.repository.inMemory.InMemoryWordDao;
 import com.maximKachan.englishDictionary.service.WordService;
-import com.maximKachan.englishDictionary.service.WordServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,8 +20,10 @@ public class WordServlet extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(WordServlet.class);
 
     @Override
-    public void init() throws ServletException {
-        wordService = new WordServiceImpl(new InMemoryWordDao());
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        WebApplicationContext wac = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
+        wordService = wac.getBean(WordService.class);
     }
 
     @Override

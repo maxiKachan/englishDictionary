@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Context>
+    <Resource name="jdbc/englishDictionary"
+              auth="Container"
+              type="javax.sql.DataSource"
+              maxActive="5" minIdle="1" maxWait="100000"
+              initialSize="3" maxPoolSize="5" minPoolSize="1" maxConnectionAge="0"
+              maxIdleTime="1800" maxIdleTimeExcessConnections="120" idleConnectionTestPeriod="30"
+              acquireIncrement="1" testConnectionOnCheckout="true"
+              removeAbandoned="true" lagAbandoned="true"
+              username="postgres"
+              password="root"
+              driverClassName="org.postgresql.Driver"
+              url="jdbc:postgresql://localhost:5432/ed_dictionary"/>
+</Context>

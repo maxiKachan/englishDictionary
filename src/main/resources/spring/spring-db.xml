@@ -5,7 +5,7 @@
        xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
-       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jee="http://www.springframework.org/schema/jee"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
             http://www.springframework.org/schema/context
@@ -13,7 +13,7 @@
             http://www.springframework.org/schema/data/jpa
             http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
             http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
-            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
 
     <context:property-placeholder location="classpath:db/dao.properties" system-properties-mode="OVERRIDE"/>
 
@@ -97,5 +97,10 @@
         <tx:annotation-driven/>
 
         <jpa:repositories base-package="com.maximKachan.englishDictionary.repository.dataJpa"/>
+    </beans>
+
+    <beans profile="tomcat">
+        <jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/englishDictionary"/>
+        <context:property-placeholder location="classpath:db/tomcat.properties" system-properties-mode="OVERRIDE"/>
     </beans>
 </beans>
