@@ -15,7 +15,7 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <spring.version>5.3.10</spring.version>
-        <slf4j.version>1.7.26</slf4j.version>
+        <slf4j.version>1.7.32</slf4j.version>
         <logback.version>1.2.6</logback.version>
         <tomcat.version>9.0.45</tomcat.version>
     </properties>
@@ -71,12 +71,8 @@
                         <containerId>tomcat9x</containerId>
                         <systemProperties>
                             <file.encoding>UTF-8</file.encoding>
-
-                            <!-- Активные профили Spring, с которыми будет запускаться приложение-->
                             <spring.profiles.active>tomcat,dataJpa</spring.profiles.active>
                         </systemProperties>
-
-                        <!-- Для создания пула коннектов томкату нужен драйвер postgres, поэтому добавляем его в зависимости-->
                         <dependencies>
                             <dependency>
                                 <groupId>org.postgresql</groupId>
@@ -87,8 +83,6 @@
                     <configuration>
                         <configfiles>
                             <configfile>
-
-                                <!-- Путь к файлу, в котором определены настройки пула коннектов-->
                                 <file>src/main/resources/tomcat/context.xml</file>
                                 <todir>conf/Catalina/localhost/</todir>
                                 <tofile>${project.build.finalName}.xml</tofile>
@@ -111,7 +105,6 @@
     </build>
 
     <dependencies>
-
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -133,20 +126,30 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
             <version>2.5.5</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
+            <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
-
 
         <!-- Hibernate -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>5.5.7.Final</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jboss.logging</groupId>
+                    <artifactId>jboss-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- Logging -->
@@ -196,7 +199,6 @@
             <version>${tomcat.version}</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>

@@ -6,6 +6,7 @@
 </head>
 <body>
 <h1>Words JSP</h1>
+<h3><a href="home">Home Page</a> </h3>
 <jsp:useBean id="word" scope="request" class="java.lang.String"/>
 <jsp:useBean id="id" scope="request" class="java.lang.String"/>
 <form action="words" method="post">

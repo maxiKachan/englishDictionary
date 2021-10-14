@@ -12,6 +12,5 @@
 <!--                <constructor-arg ref="wordRepository"/>-->
 <!--        </bean>-->
         <context:component-scan base-package="com.maximKachan.englishDictionary.domain"/>
-        <context:component-scan base-package="com.maximKachan.englishDictionary.controller"/>
         <context:component-scan base-package="com.maximKachan.englishDictionary.service"/>
 </beans>
