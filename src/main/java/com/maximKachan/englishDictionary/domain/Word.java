@@ -17,8 +17,8 @@ public class Word {
     @Column(name = "word")
     private String word;
 //    private TypeOfWord type;
-    @Column(name = "meaning_in_russian")
-    private String meaningInRussian;
+    @Column(name = "meaning")
+    private String meaning;
 //    private List<String> opposite;
 //    private List<String> synonym;
 //    private String describe;
@@ -32,15 +32,15 @@ public class Word {
         this.word = word;
     }
 
-    public Word(String word, String meaningInRussian){
+    public Word(String word, String meaning){
         this.word = word;
-        this.meaningInRussian = meaningInRussian;
+        this.meaning = meaning;
     }
 
-    public Word(Integer wordId, String word, String meaningInRussian){
+    public Word(Integer wordId, String word, String meaning){
         this.wordId = wordId;
         this.word = word;
-        this.meaningInRussian = meaningInRussian;
+        this.meaning = meaning;
     }
 
 //    public Word(String word, TypeOfWord type, String meaningInRussian) {
@@ -74,12 +74,12 @@ public class Word {
 //        this.type = type;
 //    }
 
-    public String getMeaningInRussian() {
-        return meaningInRussian;
+    public String getMeaning() {
+        return meaning;
     }
 
-    public void setMeaningInRussian(String meaningInRussian) {
-        this.meaningInRussian = meaningInRussian;
+    public void setMeaning(String meaning) {
+        this.meaning = meaning;
     }
 
 //    public List<String> getOpposite() {
@@ -128,7 +128,7 @@ public class Word {
                 "id='" + wordId + '\'' +
                 "word='" + word + '\'' +
 //                ", type=" + type +
-                ", meaningInRussian='" + meaningInRussian + '\'' +
+                ", meaning='" + meaning + '\'' +
 //                ", opposite=" + opposite +
 //                ", synonym=" + synonym +
 //                ", describe='" + describe + '\'' +

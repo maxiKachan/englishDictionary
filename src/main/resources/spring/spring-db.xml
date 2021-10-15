@@ -22,9 +22,10 @@
 
     <context:property-placeholder location="classpath:db/dao.properties" system-properties-mode="OVERRIDE"/>
 
-    <jdbc:initialize-database enabled="${db.init}">
-        <jdbc:script location="classpath:db/dictionarySmallProject.sql"/>
-    </jdbc:initialize-database>
+<!--    FOR hsql-->
+<!--    <jdbc:initialize-database enabled="${db.init}">-->
+<!--        <jdbc:script location="classpath:db/dictionarySmallProject.sql"/>-->
+<!--    </jdbc:initialize-database>-->
 
     <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource">
         <property name="driverClassName" value="${db.driver}"/>

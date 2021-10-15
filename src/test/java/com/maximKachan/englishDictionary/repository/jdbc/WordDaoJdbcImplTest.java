@@ -32,7 +32,7 @@ public class WordDaoJdbcImplTest {
     public void addWord() {
         Word word = new Word();
         word.setWord("run");
-        word.setMeaningInRussian("бежать");
+        word.setMeaning("бежать");
         ws.addWord(word);
         List<Word> words = ws.getWords("");
         assertEquals(word.getWord(), words.get(words.size()-1).getWord());
@@ -43,7 +43,7 @@ public class WordDaoJdbcImplTest {
     public void updateWord() {
         Word word = new Word();
         word.setWord("jump");
-        word.setMeaningInRussian("прыгать или скакать");
+        word.setMeaning("прыгать или скакать");
         ws.updateWord(6, word);
         List<Word> words = ws.getWords("");
         assertEquals(word.getWord(), words.get(words.size()-1).getWord());

@@ -29,6 +29,7 @@ public class JpaWordRepositoryTest {
     @Test
     public void getWords() {
         List<Word> words = ws.getWords("");
+        System.out.println(words);
         assertEquals(mockWords.size(), words.size());
         assertMatch(words, mockWords);
     }
@@ -71,7 +72,7 @@ public class JpaWordRepositoryTest {
         Word word = new Word("gone");
         Word getWord = ws.getWordById(1);
         word.setWordId(getWord.getWordId());
-        word.setMeaningInRussian(getWord.getMeaningInRussian());
+        word.setMeaning(getWord.getMeaning());
         ws.updateWord(word.getWordId(), word);
         assertEquals(word, ws.getWordById(word.getWordId()));
     }

@@ -5,7 +5,6 @@ import com.maximKachan.englishDictionary.exception.DaoException;
 import com.maximKachan.englishDictionary.repository.WordRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,9 +17,9 @@ import java.util.List;
 public class WordDaoJdbcImpl implements WordRepository {
     private static final Logger log = LoggerFactory.getLogger(WordDaoJdbcImpl.class);
 
-    public static final String GET_WORDS_BY_PATTERN = "SELECT word, meaning_in_russian FROM sp_words WHERE word LIKE ?";
-    public static final String ADD_WORD = "INSERT INTO sp_words (word, meaning_in_russian) VALUES (?,?)";
-    public static final String UPDATE_WORD = "UPDATE sp_words SET word = ?, meaning_in_russian = ? WHERE word_id = ?";
+    public static final String GET_WORDS_BY_PATTERN = "SELECT word, meaning FROM sp_words WHERE word LIKE ?";
+    public static final String ADD_WORD = "INSERT INTO sp_words (word, meaning) VALUES (?,?)";
+    public static final String UPDATE_WORD = "UPDATE sp_words SET word = ?, meaning = ? WHERE word_id = ?";
     public static final String DELETE_WORD = "DELETE FROM sp_words WHERE word_id = ?";
 
     @Override
@@ -37,7 +36,7 @@ public class WordDaoJdbcImpl implements WordRepository {
             while (rs.next()){
                 Word word = new Word();
                 word.setWord(rs.getString("word"));
-                word.setMeaningInRussian(rs.getString("meaning_in_russian"));
+                word.setMeaning(rs.getString("meaning_in_russian"));
                 words.add(word);
             }
 
@@ -61,7 +60,7 @@ public class WordDaoJdbcImpl implements WordRepository {
         PreparedStatement stmt = con.prepareStatement(ADD_WORD)){
 
             stmt.setString(1, word.getWord());
-            stmt.setString(2, word.getMeaningInRussian());
+            stmt.setString(2, word.getMeaning());
 
             stmt.executeUpdate();
         } catch (SQLException e){
@@ -76,7 +75,7 @@ public class WordDaoJdbcImpl implements WordRepository {
         PreparedStatement stmt = con.prepareStatement(UPDATE_WORD)){
 
             stmt.setString(1, word.getWord());
-            stmt.setString(2, word.getMeaningInRussian());
+            stmt.setString(2, word.getMeaning());
             stmt.setLong(3, id);
 
             stmt.executeUpdate();

@@ -14,7 +14,7 @@ public class CheckWord {
 
     // return true if the word is correct
     public static boolean checkWord(Word word){
-        if (word.getWord().isEmpty() || word.getMeaningInRussian().isEmpty()) return false;
-        return !checkPattern(word.getWord()) && !checkPattern(word.getMeaningInRussian());
+        if (word.getWord().isEmpty() || word.getMeaning().isEmpty()) return false;
+        return !checkPattern(word.getWord()) && !checkPattern(word.getMeaning());
     }
 }

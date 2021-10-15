@@ -64,7 +64,7 @@ public class WordDaoJdbcTemplateImplTest {
         List<Word> addedMockWord = addedMockWord();
         assertEquals(addedMockWord.size(), addedWord.size());
         assertEquals(mockAddWord().getWord(), addedWord.get(addedWord.size()-1).getWord());
-        assertEquals(mockAddWord().getMeaningInRussian(), addedWord.get(addedWord.size()-1).getMeaningInRussian());
+        assertEquals(mockAddWord().getMeaning(), addedWord.get(addedWord.size()-1).getMeaning());
     }
 
     @Test
@@ -93,8 +93,8 @@ public class WordDaoJdbcTemplateImplTest {
         ws.updateWord(5, new Word("run", "бежать"));
         List<Word> updatedWords = ws.getWords("");
         assertEquals(mockUpdateWord().getWord(), updatedWords.get(updatedWords.size()-1).getWord());
-        assertEquals(mockUpdateWord().getMeaningInRussian(),
-                updatedWords.get(updatedWords.size()-1).getMeaningInRussian());
+        assertEquals(mockUpdateWord().getMeaning(),
+                updatedWords.get(updatedWords.size()-1).getMeaning());
     }
 
     @Test
@@ -102,8 +102,8 @@ public class WordDaoJdbcTemplateImplTest {
         ws.updateWord(5, new Word("", "бежать"));
         List<Word> updatedWords = ws.getWords("");
         assertEquals(mockWords.get(mockWords.size()-1).getWord(), updatedWords.get(updatedWords.size()-1).getWord());
-        assertEquals(mockWords.get(mockWords.size()-1).getMeaningInRussian(),
-                updatedWords.get(updatedWords.size()-1).getMeaningInRussian());
+        assertEquals(mockWords.get(mockWords.size()-1).getMeaning(),
+                updatedWords.get(updatedWords.size()-1).getMeaning());
     }
 
     @Test

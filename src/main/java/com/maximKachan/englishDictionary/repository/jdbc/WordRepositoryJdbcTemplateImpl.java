@@ -36,22 +36,22 @@ public class WordRepositoryJdbcTemplateImpl implements WordRepository {
     public Word getWordById(Integer id) throws DaoException {
         log.info("get word by id dao");
 
-        return jdbcTemplate.query("SELECT word_id, word, meaning_in_russian FROM sp_words WHERE word_id = ?",
+        return jdbcTemplate.query("SELECT word_id, word, meaning FROM sp_words WHERE word_id = ?",
                 ROW_MAPPER, id).stream().findAny().orElse(null);
     }
 
     @Override
     public void addWord(Word word) throws DaoException {
         log.info("addWord");
-        jdbcTemplate.update("INSERT INTO sp_words (word, meaning_in_russian) VALUES (?,?)",
-                word.getWord(), word.getMeaningInRussian());
+        jdbcTemplate.update("INSERT INTO sp_words (word, meaning) VALUES (?,?)",
+                word.getWord(), word.getMeaning());
     }
 
     @Override
     public void updateWord(Integer id, Word word) throws DaoException {
         log.info("updateWord");
-        jdbcTemplate.update("UPDATE sp_words SET word = ?, meaning_in_russian = ? WHERE word_id = ?",
-                word.getWord(), word.getMeaningInRussian(), id);
+        jdbcTemplate.update("UPDATE sp_words SET word = ?, meaning = ? WHERE word_id = ?",
+                word.getWord(), word.getMeaning(), id);
     }
 
     @Override
