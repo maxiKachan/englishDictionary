@@ -16,7 +16,9 @@ public class Word {
 
     @Column(name = "word")
     private String word;
-//    private TypeOfWord type;
+    @Column(name = "type")
+    @Enumerated(EnumType.STRING)
+    private Type type;
     @Column(name = "meaning")
     private String meaning;
 //    private List<String> opposite;
@@ -66,13 +68,13 @@ public class Word {
         this.word = word;
     }
 
-//    public TypeOfWord getType() {
-//        return type;
-//    }
-//
-//    public void setType(TypeOfWord type) {
-//        this.type = type;
-//    }
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
 
     public String getMeaning() {
         return meaning;

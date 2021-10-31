@@ -2,10 +2,13 @@ package com.maximKachan.englishDictionary.utils;
 
 import com.maximKachan.englishDictionary.domain.Word;
 import org.assertj.core.api.Assertions;
+import org.springframework.test.web.servlet.ResultMatcher;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class WordTestData {
 
@@ -27,6 +30,10 @@ public class WordTestData {
 
     public static void assertMatch(Iterable<Word> actual, Iterable<Word> expected){
         Assertions.assertThat(actual).usingDefaultElementComparator().isEqualTo(expected);
+    }
+
+    public static void assertMatch(Word actual, Word expected){
+        assertEquals(actual, expected);
     }
 
     public static List<Word> getMockWordsWithWrongPattern(){
@@ -57,5 +64,15 @@ public class WordTestData {
         List<Word> deletedOneWord = new ArrayList<>(mockWords);
         deletedOneWord.remove(4);
         return deletedOneWord;
+    }
+
+    public static ResultMatcher contentJson(Word ... expected){
+        List<Word> words = new ArrayList<>();
+        Collections.addAll(words, expected);
+        return result -> assertMatch(TestUtil.readListFromJsonMvcResult(result, Word.class), words);
+    }
+
+    public static ResultMatcher contentJson(Word expected){
+        return result -> assertMatch(TestUtil.readFromJsonMvcResult(result, Word.class), expected);
     }
 }

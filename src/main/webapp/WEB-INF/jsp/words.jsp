@@ -10,15 +10,15 @@
 <table>
     <tr>
         <th>Words</th>
+        <th>Type of word</th>
         <th>Meaning</th>
     </tr>
     <jsp:useBean id="words" scope="request" type="java.util.List"/>
     <c:forEach var="word" items="${words}">
         <tr>
             <td><a href="words/${word.wordId}">${word.word}</a></td>
+            <td>${word.type}</td>
             <td>${word.meaning}</td>
-            <td><a href="words?delete=true&id=${word.wordId}">Delete</a></td>
-            <td><a href="words?update=true&id=${word.wordId}&word=${word.word}&meaning=${word.meaning}">Update</a> </td>
         </tr>
     </c:forEach>
 </table>

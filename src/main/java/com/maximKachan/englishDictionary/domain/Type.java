@@ -1,11 +1,11 @@
 package com.maximKachan.englishDictionary.domain;
 
-public enum TypeOfWord {
+public enum Type {
     NOUN,         //существительное
     VERB,         //глагол
     INTERJECTION, //междометие
     PRONOUN,      //местоимение
-    ADJECTIVE,    //прилогательное
+    ADJECTIVE,    //прилагательное
     ADVERB,       //наречие
     PREPOSITION,  //предлог
     CONJUNCTIONS  //союз

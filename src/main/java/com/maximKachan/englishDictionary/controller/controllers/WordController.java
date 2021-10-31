@@ -1,4 +1,4 @@
-package com.maximKachan.englishDictionary.controller;
+package com.maximKachan.englishDictionary.controller.controllers;
 
 import com.maximKachan.englishDictionary.domain.Word;
 import com.maximKachan.englishDictionary.service.WordService;
@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping(value = "/words")
 public class WordController {
 
     private final WordService service;
@@ -15,7 +16,7 @@ public class WordController {
         service = wordService;
     }
 
-    @GetMapping("/words")
+    @GetMapping
     public String wordsList(Model model) {
 
         model.addAttribute("words", service.getWords(""));
@@ -23,21 +24,15 @@ public class WordController {
         return "words";
     }
 
-    @GetMapping("/home")
-    public String startPage() {
-
-        return "home";
-    }
-
-    @GetMapping("/words/{id}")
+    @GetMapping("/{id}")
     public String getById(@PathVariable int id, Model model){
 
-        model.addAttribute("word",service.getWordById(id));
+        model.addAttribute("word", service.getWordById(id));
 
         return "item";
     }
 
-    @GetMapping("/words/{id}/edit")
+    @GetMapping("/{id}/edit")
     public String updatePage(@PathVariable int id, Model model){
 
         model.addAttribute("word", service.getWordById(id));
@@ -45,12 +40,12 @@ public class WordController {
         return "updateWord";
     }
 
-    @GetMapping("/words/new")
+    @GetMapping("/new")
     public String addPage(){
         return "new";
     }
 
-    @PostMapping("/words")
+    @PostMapping
     public String addWord(@ModelAttribute("word") Word word){
 
         service.addWord(word);
@@ -58,7 +53,7 @@ public class WordController {
         return "redirect:/words";
     }
 
-    @PatchMapping("/words/{id}")
+    @PatchMapping("/{id}")
     public String updateWord(@PathVariable int id, @ModelAttribute("word") Word word) {
 
         service.updateWord(id, word);
@@ -66,7 +61,7 @@ public class WordController {
         return "redirect:/words";
     }
 
-    @DeleteMapping("/words/{id}")
+    @DeleteMapping("/{id}")
     private String deleteWord(@PathVariable int id){
 
         service.deleteWord(id);
